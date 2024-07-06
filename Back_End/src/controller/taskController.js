@@ -31,11 +31,11 @@ async function buscandoTDSDadosUser(request, response) {
 
 async function buscandoDadosUser(request, response) {
     const params = Array(
-        request.params.id
+        request.body.email_user
     )
 
-    const query = "SELECT * FROM usuarios WHERE id = ?;";
-
+    const query = "SELECT * FROM usuarios WHERE email = ?;";
+        console.log(params)
     connection.query(query, params, (err, results) => {
         if(results) {
             response

@@ -6,12 +6,14 @@ const { buscandoTDSDadosUser, buscandoDadosUser, postUsuario, getUser, } = requi
 // POST
 
 router.post('/cadastro', postUsuario);
+router.post('/User/BuscandoDadosUser/', buscandoDadosUser);
+
+
 
 // GET
 
 router.get('/User/BuscandoTDS', buscandoTDSDadosUser);
 
-router.get('/User/BuscandoDadosUser/:id', buscandoDadosUser);
 
 
 module.exports = router;

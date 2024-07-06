@@ -7,19 +7,23 @@ button.onclick = async function(e) {
     let senha_user = document.getElementById('password').value;
     let cod_escola = document.getElementById('cod_escola').value;
 
-    // GET
-    const response = await fetch('http://localhost:3008/api/User/BuscandoTDS', {
-        method: "GET",
-        headers: { "Content-type": "application/json;charset=UTF-8" }
+    let data = {email_user, senha_user, cod_escola }
+
+        // POST
+
+    const response = await fetch('http://localhost:3008/api/User/BuscandoDadosUser/', {
+        method: "POST",
+        headers: { "Content-type": "application/json;charset=UTF-8" },
+        body: JSON.stringify(data)
     });
 
     let content = await response.json();
     console.log(content);
     
-    if (content.sucess) {
-        for (let i = 0; i < content.data.length; i++) {
-            if(content.data[i].email === email_user && content.data[i].senha === senha_user && content.data[i].codigo_escola === cod_escola) {
-                localStorage.setItem('idUser', content.data[i].id)
+    if (content.sucess && content.data.length) {
+        
+            if(content.data[0].senha === senha_user && content.data[0].codigo_escola === cod_escola) {
+                localStorage.setItem('idUser', content.data[0].id)
 
                 Swal.fire({
                     title: "Login realizado com sucesso!!",
@@ -27,7 +31,9 @@ button.onclick = async function(e) {
                     showConfirmButton: false,
                     timer: 2000
                 });
+
                 setTimeout(() => {
+                    window.location.href = "../Perfil/perfil.html"
                 }, 2000);
             }
             
@@ -40,7 +46,7 @@ button.onclick = async function(e) {
                     timer: 2300
                 });
             }
-        }
+
 
 
     } else {

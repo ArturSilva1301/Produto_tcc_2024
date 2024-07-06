@@ -21,7 +21,6 @@ button.onclick = async function (e) {
     
     if (content.sucess) {
         alert ("Sucesso com o POST!!");
-
     } else {
         console.error()
         alert("Não deu o POST!!");
