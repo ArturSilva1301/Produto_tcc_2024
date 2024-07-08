@@ -1,5 +1,5 @@
 create database crescendo_juntos;
-
+use crescendo_juntos;
 create table usuarios(
 	id int primary key auto_increment,
     email varchar(30) NOT NULL,
