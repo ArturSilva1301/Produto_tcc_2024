@@ -2,10 +2,9 @@ create database crescendo_juntos;
 use crescendo_juntos;
 
 create table escola(
-	nome varchar(30) NOT NULL,
+	codigo_escola int primary key auto_increment,
     email varchar(30) NOT NULL,
-    senha varchar(30) NOT NULL,
-    codigo_escola int primary key auto_increment
+    senha varchar(30) NOT NULL    
 );
 
 create table responsavel(
