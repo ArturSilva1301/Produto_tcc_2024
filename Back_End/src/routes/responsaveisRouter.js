@@ -1,7 +1,8 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 
-const { storeResponsaveis } = require('../controller/responsaveisController')
+const { storeResponsaveis } = require('../controllers/responsaveisController');
 
-router.post('/store/school', storeResponsaveis);
+router.post('/cadastro', storeResponsaveis); // Remova o prefixo /api
 
 module.exports = router;
