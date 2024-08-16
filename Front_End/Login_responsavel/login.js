@@ -3,14 +3,19 @@ let button = document.querySelector('button');
 button.onclick = async function(e) {
     e.preventDefault();
     
-    let email = document.getElementById('email').value;
-    let senha = document.getElementById('password').value;
-    let cod_escola = document.getElementById('cod_escola').value;
+    let email = document.getElementById('email').value.trim();
+    let senha = document.getElementById('password').value.trim();
+    let cod_escola = document.getElementById('cod_escola').value.trim();
 
-    let data = { email, senha, cod_escola }; // Corrigido para usar 'senha' em vez de 'senha_user'
+    if (!email || !senha || !cod_escola) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
+    let data = { email, senha, cod_escola };
 
     try {
-        const response = await fetch('http://localhost:3008/api/User/BuscandoDadosUser/', {
+        const response = await fetch('http://localhost:3008/api/responsaveis/login', { // Endpoint de login dos responsáveis
             method: "POST",
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify(data)

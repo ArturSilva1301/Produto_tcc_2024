@@ -15,29 +15,30 @@ button.onclick = async function(e) {
     let data = { email, senha, codigo_escola };
 
     try {
-        const response = await fetch('http://localhost:3008/api/cadastro', {
+        const response = await fetch('http://localhost:3008/api/responsaveis/cadastro', {
             method: "POST",
-            headers: { "Content-type": "application/json;charset=UTF-8" },
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
             body: JSON.stringify(data)
         });
 
         if (!response.ok) {
             let error = await response.json();
-            throw new Error(error.message);
+            console.error('Erro na resposta:', error);
+            throw new Error(error.message || 'Erro desconhecido');
         }
 
         let content = await response.json();
-        console.log(content);
+        console.log('Resposta do servidor:', content);
 
         if (content.success) {
-            alert ("Cadastro realizado com sucesso!");
-            window.location.replace("../Login/login.html");
+            alert("Cadastro realizado com sucesso!");
+            window.location.replace("../Login_responsavel/login.html");
         } else {
             console.error("Erro no cadastro:", content.message);
             alert("Não foi possível completar o cadastro. Por favor, tente novamente.");
         }
     } catch (error) {
-        console.error("Erro no cadastro:", error.message);
+        console.error("Erro ao tentar cadastrar:", error.message);
         alert("Erro ao tentar cadastrar. Por favor, tente novamente mais tarde.");
     }
-}
+};

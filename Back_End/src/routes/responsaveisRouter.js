@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const { storeResponsaveis } = require('../controllers/responsaveisController');
+const { storeResponsaveis, authenticateResponsaveis } = require('../controllers/responsaveisController');
 
-router.post('/cadastro', storeResponsaveis); // Remova o prefixo /api
+router.post('/cadastro', storeResponsaveis);
+router.post('/login', authenticateResponsaveis); // Endpoint para login
 
 module.exports = router;
