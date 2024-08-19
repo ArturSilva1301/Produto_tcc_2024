@@ -1,10 +1,10 @@
 const connection = require('../config/db');
 
 async function storeResponsaveis(request, response) {
-  const { email, senha, codigo_escola } = request.body;
+  const {nome ,email, senha, codigo_escola } = request.body;
 
-  const query = "INSERT INTO responsavel(email, senha, codigo_escola) VALUES (?, ?, ?);";
-  const params = [email, senha, codigo_escola];
+  const query = "INSERT INTO responsavel(nome, email, senha, codigo_escola) VALUES (?, ?, ?,?);";
+  const params = [nome, email, senha, codigo_escola];
 
   connection.query(query, params, (err, results) => {
     if (err) {
@@ -25,10 +25,10 @@ async function storeResponsaveis(request, response) {
 }
 
 async function authenticateResponsaveis(request, response) {
-  const { email, senha, codigo_escola } = request.body;
+  const {nome, email, senha, codigo_escola } = request.body;
 
-  const query = "SELECT id, senha, codigo_escola FROM responsavel WHERE email = ? AND codigo_escola = ?;";
-  const params = [email, codigo_escola];
+  const query = "SELECT id, nome, senha, codigo_escola FROM responsavel WHERE email = ? AND codigo_escola = ?;";
+  const params = [ email, codigo_escola];
 
   connection.query(query, params, (err, results) => {
     if (err) {

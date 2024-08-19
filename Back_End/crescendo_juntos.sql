@@ -13,7 +13,7 @@ create table responsavel(
     email varchar(30) NOT NULL,
     senha varchar(30) NOT NULL,
     codigo_escola int,
-    foreign key (codigo_escola) references escola(codigo_escola)
+    foreign key (codigo_escola) references escola (codigo_escola)
 );
 
 create table professores(
@@ -24,3 +24,6 @@ create table professores(
     codigo_escola int,
     foreign key (codigo_escola) references escola(codigo_escola)
 );
+
+select * from escola;
+select * from responsavel;

@@ -3,17 +3,18 @@ let button = document.querySelector('button');
 button.onclick = async function(e) {
     e.preventDefault();
 
+    let nome = document.getElementById('nome').value.trim();
     let email = document.getElementById('email').value.trim();
     let senha = document.getElementById('senha').value.trim();
     let confirm_senha = document.getElementById('confirm_senha').value.trim();
     let codigo_escola = document.getElementById('codigo_escola').value.trim();
 
-    if (!email || !senha || !codigo_escola) {
+    if (!nome ||!email || !senha || !codigo_escola) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
 
-    let data = { email, senha, confirm_senha, codigo_escola };
+    let data = { nome, email, senha, confirm_senha, codigo_escola };
 
     try {
         const response = await fetch('http://localhost:3008/api/cadastro', {
