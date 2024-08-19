@@ -3,14 +3,8 @@ const connection = require('../config/db');
 async function storeSchool(request, response) {
     const { email, password } = request.body;
 
-    if (!email || !password) {
-        return response.status(400).json({
-            success: false,
-            message: "Email e senha são obrigatórios",
-        });
-    }
-
     const params = [email, password];
+    
     const query = "INSERT INTO escola(email, senha) VALUES (?, ?);";
 
     connection.query(query, params, (err, results) => {
@@ -21,13 +15,14 @@ async function storeSchool(request, response) {
                 message: "Erro ao inserir escola",
                 data: err,
             });
+        } 
+        else {
+            response.status(201).json({
+                success: true,
+                message: "Escola criada com sucesso",
+                data: results,
+            });
         }
-
-        response.status(201).json({
-            success: true,
-            message: "Escola criada com sucesso",
-            data: results,
-        });
     });
 }
 
