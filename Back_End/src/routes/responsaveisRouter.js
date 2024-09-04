@@ -8,7 +8,7 @@ const { storeResponsaveis, authenticateResponsaveis } = require('../controller/r
 router.post('/cadastro', storeResponsaveis);
 // Define uma rota POST '/cadastro' que usa 'storeResponsaveis' para registrar novos responsáveis.
 
-router.post('/login', authenticateResponsaveis);
+router.post('/responsaveis/login', authenticateResponsaveis);
 // Define uma rota POST '/login' que usa 'authenticateResponsaveis' para autenticar responsáveis.
 
 module.exports = router;

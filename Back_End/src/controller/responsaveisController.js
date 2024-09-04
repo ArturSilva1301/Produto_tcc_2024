@@ -31,12 +31,14 @@ async function storeResponsaveis(request, response) {
 }
 
 async function authenticateResponsaveis(request, response) {
-  const { nome, email, senha, codigo_escola } = request.body;
+
   // Desestrutura os dados do corpo da requisição.
 
   const query = "SELECT id, nome, senha, codigo_escola FROM responsavel WHERE email = ? AND codigo_escola = ?;";
+
   // Define a consulta SQL para buscar um responsável com o e-mail e código da escola fornecidos.
-  const params = [email, codigo_escola];
+
+  const params = [ email, codigo_escola];
   // Define os parâmetros da consulta com base nos dados recebidos.
 
   connection.query(query, params, (err, results) => {

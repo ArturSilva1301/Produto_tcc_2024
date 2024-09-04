@@ -6,18 +6,19 @@ button.onclick = async function(e) {
     // Define um evento de clique para o botão. Quando clicado, a função é executada. 
     // 'e.preventDefault()' impede o comportamento padrão do botão, como recarregar a página.
 
+    let nome = document.getElementById('nome').value.trim();
     let email = document.getElementById('email').value.trim();
     let senha = document.getElementById('password').value.trim();
-    let cod_escola = document.getElementById('cod_escola').value.trim();
+    let cod_escola = document.getElementById('codigo_escola').value.trim();
     // Captura os valores dos campos de entrada (email, senha, e código da escola) e remove os espaços em branco extras.
 
-    if (!email || !senha || !cod_escola) {
+    if (!nome || !email || !senha || !cod_escola) {
         alert("Por favor, preencha todos os campos.");
         return;
     }
     // Verifica se todos os campos foram preenchidos. Se algum campo estiver vazio, exibe um alerta e interrompe a execução.
 
-    let data = { email, senha, cod_escola };
+    let data = { nome, email, senha, cod_escola };
     // Cria um objeto 'data' contendo os valores capturados dos campos de entrada.
 
     try {
