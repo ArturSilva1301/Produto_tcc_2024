@@ -45,11 +45,12 @@ async function postImagem(request, response) {
     // Move a imagem para o diretório 'uploads'. Se ocorrer um erro durante o processo, retorna uma resposta com erro 400.
 
     const params = Array(
-      imgnome
+      imgnome,
+      request.body.cod_escola 
     );
     // Cria um array 'params' contendo o nome da imagem, que será usado na query do banco de dados.
 
-    const query = "INSERT INTO imagem(imagem) VALUES(?)"; // Correção para 'UPDATE'
+    const query = "INSERT INTO imagem(imagem, codigo_escola) VALUES(?,?)"; // Correção para 'UPDATE'
     // Define a query SQL para inserir o nome da imagem na tabela 'imagem'.
 
     connection.query(query, params, (err, results) => {

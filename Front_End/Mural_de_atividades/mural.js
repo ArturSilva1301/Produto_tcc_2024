@@ -1,13 +1,18 @@
 let button = document.querySelector("button");
 // Seleciona o elemento 'button' na página e o armazena na variável 'button'.
 
+let cod_escola = localStorage.getItem("cod_escola")
+
 button.onclick = async function (event) {
   event.preventDefault();
   // Define um evento de clique para o botão. Quando o botão é clicado, a função é executada. 
   // 'event.preventDefault()' impede o comportamento padrão do botão, como enviar o formulário ou recarregar a página.
 
   let form = document.getElementById("forms_mural");
+  let imagem = document.getElementById("imagem");
   let formData = new FormData(form);
+  formData.append("cod_escola", cod_escola);
+  formData.append("imagem", imagem);
   // Captura o formulário com o ID 'forms_mural' e cria um objeto 'FormData' com os dados do formulário, incluindo arquivos selecionados.
 
   const response = await fetch("http://localhost:3008/api/update/postimg", {
