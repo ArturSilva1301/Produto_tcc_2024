@@ -6,6 +6,22 @@ const { storeSchool, authenticateUser } = require('../controller/escolaControlle
 // Importa as funções 'storeSchool' e 'authenticateUser' do controlador 'escolaController'.
 // Essas funções gerenciam o cadastro de escolas e a autenticação de usuários.
 
+/**
+ * @swagger
+ * /tasks/list:
+ *   get:
+ *     summary: Cria as tarefas
+ *     responses:
+ *       200:
+ *         description: Cria as tarefas no banco de dados
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ */
+
 router.post('/store/school', storeSchool);
 // Define a rota POST '/store/school' para processar o cadastro de novas escolas usando 'storeSchool'.
 

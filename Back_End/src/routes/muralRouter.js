@@ -4,6 +4,22 @@ const { Router } = require('express');
 const { postImagem } = require('../controller/muralController');
 // Importa a função 'postImagem' do controlador para processar uploads de imagens.
 
+/**
+ * @swagger
+ * /tasks/list:
+ *   get:
+ *     summary: Cria as tarefas
+ *     responses:
+ *       200:
+ *         description: Cria as tarefas no banco de dados
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ */
+
 const router = Router();
 // Cria uma instância do roteador para definir rotas específicas para operações relacionadas a imagens.
 

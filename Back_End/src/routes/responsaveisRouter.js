@@ -5,6 +5,22 @@ const router = express.Router();
 const { storeResponsaveis, authenticateResponsaveis } = require('../controller/responsaveisController');
 // Importa funções do controlador para manipular o cadastro e autenticação dos responsáveis.
 
+/**
+ * @swagger
+ * /tasks/list:
+ *   get:
+ *     summary: Cria as tarefas
+ *     responses:
+ *       200:
+ *         description: Cria as tarefas no banco de dados
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ */
+
 router.post('/cadastro', storeResponsaveis);
 // Define uma rota POST '/cadastro' que usa 'storeResponsaveis' para registrar novos responsáveis.
 
