@@ -30,7 +30,7 @@ button.onclick = async function (event) {
     alert("IMAGEM FOI!");
     // Se o upload da imagem foi bem-sucedido, exibe um alerta informando que a imagem foi enviada com sucesso.
   } else {
-    console.error("ERRO ao mandar a imagem:", content.sql);
+    console.error("ERRO ao mandar a imagem:", content);
     alert("Selecione a imagem novamente");
     // Se houve um erro ao enviar a imagem, exibe um erro no console com os detalhes e um alerta pedindo para tentar novamente.
   }
