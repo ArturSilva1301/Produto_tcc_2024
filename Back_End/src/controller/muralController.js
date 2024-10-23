@@ -78,36 +78,42 @@ async function postImagem(request, response) {
 }
 
 async function getImagem(request, response) {
+  const codEscola = request.params.cod_escola;
 
-  const params = Array(
-    request.params.cod_escola 
-  );
-  // Cria um array 'params' contendo o nome da imagem, que será usado na query do banco de dados.
+  // Verifica se o código da escola foi fornecido
+  if (!codEscola) {
+    return response.status(400).json({
+      success: false,
+      message: "Código da escola não fornecido."
+    });
+  }
 
-  const query = "SELECT imagem FROM imagem WHERE codigo_escola = ?"; // Correção para 'UPDATE'
-  // Define a query SQL para inserir o nome da imagem na tabela 'imagem'.
-
-  connection.query(query, params, (err, results) => {
-    if (results) {
-      response.status(200).json({
-        success: true,
-        message: "Sucesso no update!",
-        params: params,
-        data: results
-      });
-      // Se a query for executada com sucesso, retorna uma resposta com sucesso 200, incluindo os dados inseridos.
-
-    } else {
-      response.status(400).json({
+  const query = "SELECT imagem FROM imagem WHERE codigo_escola = ?";
+  
+  connection.query(query, [codEscola], (err, results) => {
+    if (err) {
+      return response.status(500).json({
         success: false,
-        message: "Problema no update!",
+        message: "Erro ao acessar o banco de dados.",
         data: err
       });
-      // Se houver um erro ao executar a query, retorna uma resposta com erro 400 e a mensagem de erro.
+    }
+
+    if (results.length > 0) {
+      response.status(200).json({
+        success: true,
+        message: "Imagem encontrada.",
+        data: results
+      });
+    } else {
+      response.status(404).json({
+        success: false,
+        message: "Imagem não encontrada."
+      });
     }
   });
-
 }
+
 
 module.exports = { postImagem, getImagem };
 // Exporta a função 'postImagem' para ser utilizada em outras partes da aplicação.

@@ -19,6 +19,8 @@ const muralRouter = require('./routes/muralRouter')
 const app = express();
 // Cria uma instância da aplicação 'express'.
 
+const professoresRouter = require('./routes/professoresRouter');
+
 dotenv.config();  
 // Carrega as variáveis de ambiente a partir do arquivo '.env' para o processo atual.
 app.set('port', process.env.PORT || 3008);
@@ -38,6 +40,7 @@ app.use('/api', responsaveisRouter);
 // Usa o roteador 'responsaveisRouter' para todas as rotas que começam com '/api'.
 app.use('/api', muralRouter);  
 // Usa o roteador 'muralRouter' para todas as rotas que começam com '/api'.
+app.use('/api', professoresRouter);
 
 module.exports = app;
 // Exporta a instância do aplicativo para ser utilizada em outros arquivos (como o arquivo que inicia o servidor).
