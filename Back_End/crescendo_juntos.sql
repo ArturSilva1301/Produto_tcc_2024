@@ -2,6 +2,7 @@ create database crescendo_juntos;
 use crescendo_juntos;
 
 create table escola(
+	nome varchar(30) NOT NULL,
 	codigo_escola int primary key auto_increment,
     email varchar(30) NOT NULL,
     senha varchar(30) NOT NULL
@@ -18,7 +19,7 @@ create table responsavel(
 
 create table professores(
     id int primary key auto_increment,
-	nome varchar(30) NOT NULL,
+    nome varchar(30) NOT NULL,
     email varchar(30) NOT NULL,
     senha varchar(30) NOT NULL,
     codigo_escola int,
@@ -37,6 +38,8 @@ select * from imagem;
 select * from escola;
 
 select * from responsavel;
+
+select * from professores;
 
 -- Selecionando a imagem para o mural da escola (para o usuário escola) em que dentro da tabela "escola" e "imagem" ambos os campos "codigo_escola" é o mesmo
 SELECT imagem

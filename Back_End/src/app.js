@@ -18,7 +18,6 @@ const muralRouter = require('./routes/muralRouter')
 // Importa o roteador 'muralRouter' que contém as rotas relacionadas ao 'mural'.
 const app = express();
 // Cria uma instância da aplicação 'express'.
-
 const professoresRouter = require('./routes/professoresRouter');
 
 dotenv.config();  

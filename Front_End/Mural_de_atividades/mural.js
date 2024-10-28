@@ -35,3 +35,8 @@ button.onclick = async function (event) {
     // Se houve um erro ao enviar a imagem, exibe um erro no console com os detalhes e um alerta pedindo para tentar novamente.
   }
 };
+
+// const response = await fetch("http://localhost:3008/api/imagens/:cod_escola", {
+//   method: "GET",
+//   body: formData,
+// });

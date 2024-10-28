@@ -2,7 +2,7 @@ const connection = require('../config/db');
 
 // Função para cadastrar um novo professor
 async function storeProfessor(request, response) {
-    const { nome, email, password, codigo_escola } = request.body;
+    const {nome, email, password, codigo_escola } = request.body;
     const params = [nome, email, password, codigo_escola];
     const query = "INSERT INTO professores(nome, email, senha, codigo_escola) VALUES (?, ?, ?, ?);";
 
