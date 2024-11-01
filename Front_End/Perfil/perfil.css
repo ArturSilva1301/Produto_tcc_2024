@@ -14,7 +14,7 @@
 }
 
 body{
-    background-color: var(--cor-fundo);
+    background: url("../img/Balões\ coloridos.svg");
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,11 +39,11 @@ form {
 form div {
     display: flex;
     flex-direction: column;
-    color: var(--cor-fonte);
+    color: var(--cor-fundo);
 }
 
 form div input {
-    background-color: var(--cor-fundo2);
+    background-color: var(--cor-fundo);
     width: 65vw;
     height: 4vh;
     padding: 2%;
@@ -52,7 +52,7 @@ form div input {
 }
 
 form div button {
-    background-color: var(--cor-fundo2);
+    background-color: var(--cor-fundo);
     width: 70vw;
     margin-top: 10%;
     padding: 7%;
