@@ -79,7 +79,7 @@ async function postImagem(request, response) {
 
 async function getImagem(request, response) {
   const codEscola = request.params.cod_escola;
-
+  
   // Verifica se o código da escola foi fornecido
   if (!codEscola) {
     return response.status(400).json({

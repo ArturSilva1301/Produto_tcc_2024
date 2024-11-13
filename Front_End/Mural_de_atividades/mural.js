@@ -40,3 +40,20 @@ button.onclick = async function (event) {
 //   method: "GET",
 //   body: formData,
 // });
+
+
+// Carregar as imagens
+
+// const mural = document.querySelector('.mural_img');
+//     content.data.forEach(imagem => {
+//       const mural_img = document.createElement('div');
+//       mural_img.className = 'mural-card';
+  
+//       const img = document.createElement('img');
+//       img.src = `http://localhost:3008/uploads/${mural_img}`; // Acesse 'imagem' diretamente no loop
+  
+//       mural_img.appendChild(img); // Adiciona a imagem ao div mural_img
+//       mural.appendChild(mural_img); // Adiciona o div mural_img ao mural
+
+//       console.log(mural)
+//     });
