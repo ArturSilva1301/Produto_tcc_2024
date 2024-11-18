@@ -2,6 +2,7 @@ async function handleSubmit(e) {
     e.preventDefault();
     // Impede o comportamento padrão do botão, como o envio do formulário.
 
+    let nome = document.getElementById('nome').value.trim();
     let email = document.getElementById('email').value.trim();
     let password = document.getElementById('password').value.trim();
     let confirm_password = document.getElementById('confirm_password').value.trim();
@@ -9,7 +10,7 @@ async function handleSubmit(e) {
 
     try {
         if (email && password && confirm_password) {
-            let data = { email, password };
+            let data = { nome, email, password };
             // Verifica se todos os campos foram preenchidos e cria um objeto com email e senha.
 
             const response = await fetch('http://localhost:3008/api/store/school', {

@@ -41,6 +41,7 @@ button.onclick = async function(e) {
         if (content.success && content.data.length > 0) {
             if (content.data[0].senha === senha && content.data[0].codigo_escola === cod_escola) {
                 localStorage.setItem('idUser', content.data[0].id);
+                localStorage.setItem('tipo_usuario', 'responsavel');
                 // Verifica se as credenciais fornecidas correspondem às informações recebidas. 
                 // Se sim, armazena o ID do usuário no 'localStorage'.
 

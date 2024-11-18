@@ -46,6 +46,7 @@ button.onclick = async function(e) {
         if (content.success && content.data.length > 0) {
             if (content.data[0].senha === senha_user) {
                 localStorage.setItem('cod_escola', content.data[0].codigo_escola);
+                localStorage.setItem('tipo_usuario', 'escola');
                 // Verifica se a senha fornecida corresponde à senha retornada pela API.
                 // Se sim, armazena o código da escola no 'localStorage' como 'idUser'.
 

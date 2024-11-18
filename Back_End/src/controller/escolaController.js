@@ -2,13 +2,13 @@ const connection = require('../config/db');
 // Importa a configuração de conexão com o banco de dados.
 
 async function storeSchool(request, response) {
-    const { email, password } = request.body;
+    const { nome, email, password } = request.body;
     // Desestrutura os dados do corpo da requisição para obter o e-mail e a senha da escola.
 
-    const params = [email, password];
+    const params = [nome, email, password];
     // Define os parâmetros da consulta com os dados recebidos.
 
-    const query = "INSERT INTO escola(email, senha) VALUES (?, ?);";
+    const query = "INSERT INTO escola(nome, email, senha) VALUES (?, ?, ?);";
     // Define a consulta SQL para inserir uma nova escola na tabela 'escola'.
 
     connection.query(query, params, (err, results) => {

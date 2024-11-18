@@ -3,6 +3,7 @@ use crescendo_juntos;
 
 create table escola(
 	nome varchar(30) NOT NULL,
+    img_perfil varchar(30) NOT NULL,
 	codigo_escola int primary key auto_increment,
     email varchar(30) NOT NULL,
     senha varchar(30) NOT NULL
@@ -10,6 +11,7 @@ create table escola(
 
 create table responsavel(
     id int primary key auto_increment,
+    img_perfil varchar(30) NOT NULL,
 	nome varchar(30) NOT NULL,
     email varchar(30) NOT NULL,
     senha varchar(30) NOT NULL,
