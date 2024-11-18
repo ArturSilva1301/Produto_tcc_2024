@@ -1,128 +1,133 @@
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .topnav {
-    background-color: #333;
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-  }
-  
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .topnav a.active {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .content {
-    padding-top: 60px;
-  }
-  
-  .container {
-    width: 100%;
-    padding: 0 16px;
-    margin: 0 auto;
-  }
-  
-  .container .row {
+@import url('https://fonts.googleapis.com/css2?family=Dekko&display=swap');
+
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+    font-family: "Dekko", cursive;
+}
+
+:root{
+    --cor-fonte: #F8BDEB;
+    --cor-fundo: #072541;
+    --cor-fundo2: #FBECB2;
+    --cor-fundo3: #FBFBFB;
+}
+
+body{
+    background: url("../img/Balões\ coloridos.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  
-  .container .col {
-    flex: 1 0 33.33%;
-    padding: 0 10px;
-    margin-bottom: 20px;
-  }
-  
-  .container .col img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .container .col .overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: .5s ease;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  
-  .container .col:hover .overlay {
-    opacity: 1;
-  }
-  
-  .container .col .overlay:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  .container .col .overlay .text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .card {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-
-  .card-body {
-    padding: 20px;
-    text-align: center;
-  }
-
-  .footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-  }
-
-  .footer .container .row {
-    display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-  }
+    flex-direction: column;
+    gap: 1vh;
+    
+    overflow: hidden;
+}
 
-  .footer .container .col {
-    flex: 1 0 25%;
-  }
+.perfil_img {
+    width: 30vw;
+    margin-top: 15%;
+}
 
-  .footer .container .col i {
-    font-size: 24px;
-  }
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 6vh;
+    margin-top: 30%;
+}
 
-  .footer .container .col i:hover {
-    color: #4CAF50;
-  }
+form div {
+    display: flex;
+    flex-direction: column;
+    color: var(#FBFBFB);
+}
+
+form div input {
+    background-color: var(--cor-fundo3);
+    color: var(--cor-fundo3);
+    width: 65vw;
+    height: 25vh;
+    padding: 2%;
+    border: 0%;
+    border-radius: 8vw;
+}
+
+form div button {
+    background-color: var(--cor-fundo3);
+    width: 70vw;
+    height: 15vh;
+    margin-top: 10%;
+    padding: 11%;
+    border: 0;
+    border-radius: 1vw;
+    color: var(--cor-fundo);
+    font-size: 2rem;
+    border-radius: 8vw;
+}
+
+/* Estilos para o footer e ondas */
+.footer {
+    position: relative;
+    width: 100vw;
+    height: 477px;
+    overflow: hidden;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 600%;
+    height: 165%;
+    background-repeat: repeat-x;
+    background-size: 50% 100%;
+    opacity: 0.5;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23072541" fill-opacity="1" d="M0,224L48,208C96,192,192,160,288,165.3C384,171,480,213,576,213.3C672,213,768,171,864,138.7C960,107,1056,85,1152,101.3C1248,117,1344,171,1392,197.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+    /* Cor alterada para #072541 */
+    animation: animateWave 4s linear infinite;
+}
+
+/* Diferentes configurações para cada onda para dar um efeito de movimento */
+#wave1 {
+    z-index: 1;
+    opacity: 1;
+    animation-delay: 0s;
+    bottom: 20px;
+}
+
+#wave2 {
+    z-index: 2;
+    opacity: 0.85;
+    animation-delay: -1s;
+    bottom: 10px;
+}
+
+#wave3 {
+    z-index: 3;
+    opacity: 0.75;
+    animation-delay: -2s;
+    bottom: 5px;
+}
+
+#wave4 {
+    z-index: 4;
+    opacity: 0.65;
+    animation-delay: -3s;
+    bottom: 0;
+}
+
+
+
+@keyframes animateWave {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
