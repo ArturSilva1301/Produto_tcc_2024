@@ -33,12 +33,12 @@ async function storeSchool(request, response) {
 }
 
 async function authenticateUser(request, response) {
-    const { email_user, senha_user, cod_escola } = request.body;
+    const { cod_escola } = request.params;
     // Desestrutura os dados do corpo da requisição para obter o e-mail, a senha e o código da escola do usuário.
 
-    const query = "SELECT codigo_escola, senha FROM escola WHERE email = ? AND codigo_escola = ?;";
+    const query = "SELECT codigo_escola, senha FROM escola WHERE codigo_escola = ?;";
     // Define a consulta SQL para buscar uma escola com base no e-mail e código da escola fornecidos.
-    const params = [email_user, cod_escola];
+    const params = [cod_escola];
     // Define os parâmetros da consulta com os dados recebidos.
 
     connection.query(query, params, (err, results) => {
@@ -51,17 +51,11 @@ async function authenticateUser(request, response) {
                 data: err,
             });
         }
-
-        if (results.length > 0 && results[0].senha === senha_user) {
-            response.status(200).json({
+        else {
+            return response.status(201).json({
                 success: true,
-                message: "Usuário autenticado com sucesso",
+                message: "Sucesso",
                 data: results,
-            });
-        } else {
-            response.status(400).json({
-                success: false,
-                message: "Credenciais inválidas",
             });
         }
     });

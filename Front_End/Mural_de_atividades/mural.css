@@ -7,14 +7,14 @@
     font-family: "Dekko", cursive;
 }
 
-:root{
+:root {
     --cor-fonte: #F8BDEB;
     --cor-fundo: #072541;
     --cor-fundo2: #FBECB2;
     --cor-fundo3: #FBFBFB;
 }
 
-body{
+body {
     background: url("../img/Balões\ coloridos.svg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -148,6 +148,7 @@ footer i {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(-50%);
     }
