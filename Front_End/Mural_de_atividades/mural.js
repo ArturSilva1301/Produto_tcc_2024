@@ -86,3 +86,21 @@ button.onclick = async function () {
     }
   }
 }
+
+// Selecionar os ícones
+const settingsIcon = document.getElementById("settingsIcon");
+const imagesIcon = document.getElementById("imagesIcon");
+const chatIcon = document.getElementById("chatIcon");
+
+// Adicionar evento de clique para cada ícone
+settingsIcon.addEventListener("click", function () {
+    window.location.href = "../Perfil/perfil.html"; // Altere o caminho para a página desejada
+});
+
+imagesIcon.addEventListener("click", function () {
+    window.location.href = "../Mural_de_atividades/mural.html"; // Altere o caminho para a página desejada
+});
+
+chatIcon.addEventListener("click", function () {
+    window.location.href = "../"; // Altere o caminho para a página desejada
+});
