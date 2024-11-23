@@ -114,6 +114,36 @@ async function getImagem(request, response) {
   });
 }
 
+async function salvarImgMural(request, response) {
+  // Obtém os IDs da atividade e do usuário do corpo da requisição
+  const imagemId = request.body.atividade_id;
+  const usuarioId = request.body.usuario_id;
+
+  // Define os parâmetros a serem inseridos na tabela 'salvos'
+  const params = [
+      atividadeId,
+      usuarioId
+  ];
+
+  // Define a query SQL para salvar a atividade para o usuário
+  const query = 'INSERT INTO salvos(atividade_id, id_usuario) VALUES(?,?)';
+
+  // Executa a query no banco de dados
+  connection.query(query, params, (err, results) => {
+      if (err) {
+          response.status(400).json({ 
+              success: false, 
+              message: "Erro ao salvar atividade!"
+          });
+      } else {
+          response.status(201).json({ 
+              success: true, 
+              message: "Atividade salva com sucesso!" 
+          });
+      }
+  });
+}
+
 
 module.exports = { postImagem, getImagem };
 // Exporta a função 'postImagem' para ser utilizada em outras partes da aplicação.

@@ -43,5 +43,7 @@ router.post('/cadastro', storeResponsaveis);
 router.post('/responsaveis/login', authenticateResponsaveis);
 // Define uma rota POST '/login' que usa 'authenticateResponsaveis' para autenticar responsáveis.
 
+router.get('/responsaveis/login/:IdUser', buscarDadosEscola);
+
 module.exports = router;
 // Exporta o roteador para ser utilizado em outras partes da aplicação.

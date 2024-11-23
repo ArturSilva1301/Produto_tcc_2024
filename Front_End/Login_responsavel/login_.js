@@ -40,11 +40,6 @@ button.onclick = async function(e) {
 
         if (content.success && content.data.length > 0) {
             if (content.data[0].senha === senha && content.data[0].codigo_escola === cod_escola) {
-                localStorage.setItem('idUser', content.data[0].id);
-                localStorage.setItem('tipo_usuario', 'responsavel');
-                // Verifica se as credenciais fornecidas correspondem às informações recebidas. 
-                // Se sim, armazena o ID do usuário no 'localStorage'.
-
                 Swal.fire({
                     title: "Login realizado com sucesso!!",
                     icon: "success",
@@ -54,6 +49,8 @@ button.onclick = async function(e) {
                 // Exibe um alerta de sucesso com SweetAlert2 informando que o login foi realizado com sucesso.
 
                 setTimeout(() => {
+                    localStorage.setItem('idUser', content.data[0].id);
+                    localStorage.setItem('tipo_usuario', 'responsavel');
                     window.location.href = "../Perfil/perfil.html";
                 }, 2000);
                 // Após 2 segundos, redireciona o usuário para a página de perfil.

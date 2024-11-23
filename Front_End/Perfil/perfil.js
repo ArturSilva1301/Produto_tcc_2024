@@ -1,10 +1,12 @@
-// Determinar o tipo de usuário salvo no localStorage
-const tipo_usuario = localStorage.getItem('tipo_usuario');
+const input_nome = document.getElementById("nome")
+const input_email = document.getElementById("email")
+const input_senha = document.getElementById("password")
+const input_idescola = document.getElementById("id_escola")
 
 // Função para buscar dados do perfil da escola
 async function buscar_perfil_escola(cod_escola) {
     try {
-        const response = await fetch(`http://localhost:3008/api/User/BuscandoDadosUser/${cod_escola}`, {
+        const response = await fetch(`http://localhost:3008/api/escola/BuscandoDados/${cod_escola}`, {
             method: "GET",
             headers: { "Content-type": "application/json;charset=UTF-8" }
         });
@@ -12,8 +14,11 @@ async function buscar_perfil_escola(cod_escola) {
         const content = await response.json();
         console.log(content);
 
-        if (content.sucess) {
-            alert('SÓ SUCESSO para escola!');
+        if (content.success) {
+            input_nome.value=content.data[0].nome;
+            input_email.value=content.data[0].email;
+            input_senha.value=content.data[0].senha;
+            input_idescola.value=content.data[0].codigo_escola;
         } else {
             console.error("Erro na resposta:", content);
             alert("Não deu o GET para a escola!!");
@@ -35,8 +40,7 @@ async function buscar_perfil_responsavel(idUser) {
         const content = await response.json();
         console.log(content);
 
-        if (content.sucess) {
-            alert('SÓ SUCESSO para responsável!');
+        if (content.success) {
         } else {
             console.error("Erro na resposta:", content);
             alert("Não deu o GET para o responsável!!");
@@ -46,6 +50,9 @@ async function buscar_perfil_responsavel(idUser) {
         alert("Erro ao buscar os dados do responsável!");
     }
 }
+
+// Determinar o tipo de usuário salvo no localStorage
+const tipo_usuario = localStorage.getItem('tipo_usuario');
 
 // Verificar o tipo de usuário e chamar a função correspondente
 if (tipo_usuario === 'escola') {

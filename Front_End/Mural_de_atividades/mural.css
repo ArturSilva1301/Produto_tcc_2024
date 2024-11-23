@@ -44,7 +44,7 @@ form {
     margin-top: 30%;
 }
 
-form div {
+.bloco_botao {
     display: flex;
     flex-direction: column;
     color: var(#FBFBFB);
@@ -60,7 +60,7 @@ form div input {
     border-radius: 8vw;
 }
 
-form div button {
+form div #input_img {
     background-color: var(--cor-fundo3);
     width: 70vw;
     height: 15vh;
@@ -83,6 +83,23 @@ form div button {
 .imagens .img_mural {
     width: 70%;
     border-radius: 7vw;
+}
+
+.container_img {
+    display: flex;
+    gap: 2vw;
+}
+
+.container_img img {
+    width: 70vw;
+    height: 28vh;
+}
+
+.container_img button {
+    height: 3vh;
+    border: 0;
+    background-color: transparent;
+    font-size: 1.4rem;
 }
 
 /* Estilos para o footer e ondas */

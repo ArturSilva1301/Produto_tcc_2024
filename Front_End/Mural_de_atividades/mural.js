@@ -1,6 +1,7 @@
-let button = document.querySelector("button");
 // Seleciona o elemento 'button' na página e o armazena na variável 'button'.
+let button = document.querySelector("button");
 
+let tipo_usuario=localStorage.getItem("tipo_usuario");
 let cod_escola = localStorage.getItem("cod_escola")
 
 // Carregando as imagens 
@@ -17,36 +18,41 @@ async function buscandoImagens() {
   if (content.success) {
     for (let i = 0; i < content.data.length; i++) {
       const img = document.createElement('img');
-      img.src = `http://localhost:3008/uploads/${content.data[i].imagem}`;
-      img.className = 'img_mural';
+      // img.src = `http://localhost:3008/uploads/${content.data[i].imagem}`;
+      // img.className = 'img_mural';
 
-      container_img.appendChild(img);
-    }
-  }
-  else {
-    // alert('Erro ao carregar as imagens!')
-    console.error();
-  }
+      // container_img.appendChild(img);
+
+      if (tipo_usuario){
+        if(tipo_usuario === "escola"){
+          container_img.innerHTML += `
+          <div class="container_img">
+          <img src="http://localhost:3008/uploads/${content.data[i].imagem}" alt="${content.data[i].imagem}" class="foto_mural">
+          </div>
+          `;
+        }
+        else {
+          container_img.innerHTML += `
+          <div class="container_img">
+          <img src="http://localhost:3008/uploads/${content.data[i].imagem}" alt="${content.data[i].imagem}" class="foto_mural">
+          <button class="botao_favoritar"><i class="bi bi-star"></i></button>
+          </div>
+          `;
+        }
+      }
+      else {
+        alert('Realize o login!!');
+      }
+};
+
+}
+else {
+  // alert('Erro ao carregar as imagens!')
+  console.error();
+}
 }
 
 buscandoImagens();
-
-// // Carregar as imagens
-
-// const mural = document.querySelector('.mural_img');
-
-// content.data.forEach(imagem => {
-//   const mural_img = document.createElement('div');
-//   mural_img.className = 'mural-card';
-
-//   const img = document.createElement('img');
-//   img.src = `http://localhost:3008/uploads/${mural_img}`; // Acesse 'imagem' diretamente no loop
-
-//   mural_img.appendChild(img); // Adiciona a imagem ao div mural_img
-//   mural.appendChild(mural_img); // Adiciona o div mural_img ao mural
-
-//   console.log(mural)
-// });
 
 // Enviando imagem
 
