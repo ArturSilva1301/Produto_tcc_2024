@@ -1,7 +1,7 @@
 const { Router } = require('express');
 // Importa o 'Router' do módulo 'express' para criar um roteador modular de rotas.
 
-const { postImagem, getImagem } = require('../controller/muralController');
+const { postImagem, getImagem, favImagem, DelfavImagem, getImgFav } = require('../controller/muralController');
 // Importa a função 'postImagem' do controlador para processar uploads de imagens.
 
 const router = Router();
@@ -42,7 +42,16 @@ router.post('/update/postimg', postImagem);
  *                 type: object
  */
 
-router.get("/imagens/:cod_escola", getImagem)
+router.get("/imagens/:cod_escola", getImagem);
+
+// Adiciona a imagem favoritada
+router.post("/imagens/favorita", favImagem);
+
+// Deleta a imagem favoritada
+router.delete("/imagens/favorita/deletando", DelfavImagem);
+
+// Busca imagens favoritadas pelo usuário
+router.get("/imagens/favoritos/:idUser", getImgFav);
 
 module.exports = router;
 // Exporta o roteador para integração com o aplicativo principal.

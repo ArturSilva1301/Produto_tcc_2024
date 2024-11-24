@@ -42,12 +42,16 @@ button.onclick = async function(e) {
 
         if (content.success) {
             alert("Cadastro realizado com sucesso!");
+            // Acrecentar sweetAlert
+
             window.location.replace("../Login_responsavel/login.html");
             // Exibe um alerta de sucesso e redireciona para a página de login se o cadastro for bem-sucedido.
         } else {
             console.log(content)
             console.error("Erro no cadastro:", content.message);
             alert("Não foi possível completar o cadastro. Por favor, tente novamente.");
+            // Acrecentar sweetAlert
+            
             // Exibe uma mensagem de erro se o cadastro falhar.
         }
     } catch (error) {

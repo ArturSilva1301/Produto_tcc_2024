@@ -1,61 +1,139 @@
 // Seleciona o elemento 'button' na página e o armazena na variável 'button'.
-let button = document.querySelector("button");
+let button = document.querySelector(".img_mural");
 
-let tipo_usuario=localStorage.getItem("tipo_usuario");
-let cod_escola = localStorage.getItem("cod_escola")
+let idUser = localStorage.getItem("idUser");
+let tipo_usuario = localStorage.getItem("tipo_usuario");
+let cod_escola = localStorage.getItem("cod_escola");
+
+if (tipo_usuario === 'responsavel') {
+  button.style.display = 'none';
+  // Acrescentar lógica para visualização do botão da tela de favoritos
+}
 
 // Carregando as imagens 
 
 const container_img = document.querySelector('.imagens');
 
 async function buscandoImagens() {
+  // Busca as imagens dentro do banco de dados da escola do usuário
   const response = await fetch(`http://localhost:3008/api/imagens/${cod_escola}`, {
     method: "GET"
   });
 
-  let content = await response.json();
+  // Busca as imagens favoritadas pelo usuário
+  const responseFavoritos = await fetch(`http://localhost:3008/api/imagens/favoritos/${idUser}`, {
+    method: "GET"
+  });
 
-  if (content.success) {
+  // Retorno da consulta de todas as imagens armazenadas no banco
+  const content = await response.json();
+
+  // Retorno da consulta das imagens favortidas pelo usuário armazenadas no banco
+  const favoritos = await responseFavoritos.json();
+
+  // Lista dos ID das imagens favoritadas
+  const listaFavoritos = [];
+
+  // Preencher a lista de favoritos
+  favoritos.data.forEach((a) => {
+    listaFavoritos.push(a.id_img); // Armazena as imagens que foram favoritadas pelo usuário para realizar a comparação com aquelas que não foram favoritadas
+  });
+
+  if (content.success && content.data.length !== 0) {
     for (let i = 0; i < content.data.length; i++) {
-      const img = document.createElement('img');
-      // img.src = `http://localhost:3008/uploads/${content.data[i].imagem}`;
-      // img.className = 'img_mural';
+      // Verifique se a imagem está na lista de favoritos
+      const isFavorito = listaFavoritos.includes(content.data[i].id);
 
-      // container_img.appendChild(img);
-
-      if (tipo_usuario){
-        if(tipo_usuario === "escola"){
+      if (tipo_usuario) {
+        if (tipo_usuario === "escola") {
           container_img.innerHTML += `
           <div class="container_img">
-          <img src="http://localhost:3008/uploads/${content.data[i].imagem}" alt="${content.data[i].imagem}" class="foto_mural">
+            <img src="http://localhost:3008/uploads/${content.data[i].imagem}" data-id="${content.data[i].id}" data-img="${content.data[i].imagem}" class="foto_mural">
           </div>
-          `;
-        }
-        else {
+        `;
+        } else {
           container_img.innerHTML += `
           <div class="container_img">
-          <img src="http://localhost:3008/uploads/${content.data[i].imagem}" alt="${content.data[i].imagem}" class="foto_mural">
-          <button class="botao_favoritar"><i class="bi bi-star"></i></button>
+            <img src="http://localhost:3008/uploads/${content.data[i].imagem}" data-id="${content.data[i].id}" data-img="${content.data[i].imagem}" class="foto_mural">
+            <button class="botao_favoritar">
+              <i class="bi ${isFavorito ? 'bi-star-fill' : 'bi-star'}"></i>
+            </button>
           </div>
-          `;
+        `;
         }
-      }
-      else {
+      } else {
+        // Se não encontrar a variável do localStorage 'tipo_usuário'
         alert('Realize o login!!');
+        window.location.hreg = '../home/home.html';
       }
-};
+    }
 
-}
-else {
-  // alert('Erro ao carregar as imagens!')
-  console.error();
-}
+    // Adiciona os eventos aos botões após carregar as imagens
+    const botoesFavoritar = document.querySelectorAll('.botao_favoritar');
+    botoesFavoritar.forEach(botao => {
+      botao.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        // Busca a tag i (icon estrela)
+        const icon = botao.querySelector('i');
+
+        // Busca a div 'containerImg'
+        const containerImg = botao.closest('.container_img');
+
+        // Busca imagem dentro da div 'containerImg'
+        const img = containerImg.querySelector('img');
+
+        // Realiza a busca dos dados que foram armazenados dentro da tag img
+        const imgId = img.dataset.id; // id da imagem
+        const imgMural = img.dataset.img; // nome da imagem
+
+        // Verificação se a imagem já foi favoritada
+        if (icon.className === 'bi bi-star') {
+          const data = { img_mural: imgMural, idUser, cod_escola };
+          
+          // Favorita a imagem
+          const response = await fetch(`http://localhost:3008/api/imagens/favorita`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
+            body: JSON.stringify(data)
+          });
+
+          let content = await response.json();
+
+          if (content.success) {
+            // Ao armazenar com sucesso a imagem favoritada dentro do banco de dados, a estrela é preechida no frontend
+            icon.className = 'bi bi-star-fill';
+
+            // Acrecentar sweetAlert
+          }
+        } else {
+          // Remove a imagem dos favoritos
+          const response = await fetch(`http://localhost:3008/api/imagens/favorita/deletando`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
+            body: JSON.stringify({ id_img_mural: imgId })
+          });
+
+          let content = await response.json();
+
+          if (content.success) {
+            // Ao remover com sucesso a imagem favoritada dentro do banco de dados, a estrela fica vazia no frontend
+            icon.className = 'bi bi-star';
+
+            // Acrecentar sweetAlert
+          }
+        }
+      });
+    });
+  } else {
+    alert('Erro ao carregar as imagens!');
+    console.error();
+  }
 }
 
 buscandoImagens();
 
 // Enviando imagem
-
 button.onclick = async function () {
   const { value: file } = await Swal.fire({
     title: "Selecione a imagem para adicionar ao mural",
@@ -83,11 +161,15 @@ button.onclick = async function () {
 
     if (content.success) {
       alert("IMAGEM FOI!");
+      // Acrecentar sweetAlert
+
       // Se o upload da imagem foi bem-sucedido, exibe um alerta informando que a imagem foi enviada com sucesso.
       window.location.reload();
     } else {
       console.error("ERRO ao mandar a imagem:", content);
       alert("Selecione a imagem novamente");
+      // Acrecentar sweetAlert
+
       // Se houve um erro ao enviar a imagem, exibe um erro no console com os detalhes e um alerta pedindo para tentar novamente.
     }
   }
@@ -99,9 +181,9 @@ const imagesIcon = document.getElementById("imagesIcon");
 
 // Adicionar evento de clique para cada ícone
 settingsIcon.addEventListener("click", function () {
-    window.location.href = "../Perfil/perfil.html"; // Altere o caminho para a página desejada
+  window.location.href = "../Perfil/perfil.html"; // Altere o caminho para a página desejada
 });
 
 imagesIcon.addEventListener("click", function () {
-    window.location.href = "../Mural_de_atividades/mural.html"; // Altere o caminho para a página desejada
+  window.location.href = "../Mural_de_atividades/mural.html"; // Altere o caminho para a página desejada
 });

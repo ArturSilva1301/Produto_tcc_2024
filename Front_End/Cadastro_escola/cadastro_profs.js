@@ -26,6 +26,8 @@ async function handleSubmitProfessor(e) {
 
             if (content.success) {
                 alert("Professor cadastrado com sucesso!");
+                // Acrecentar sweetAlert
+
                 setTimeout(() => {
                     window.location.href = "../Login_professor/login.html";
                 }, 2000);
@@ -33,10 +35,14 @@ async function handleSubmitProfessor(e) {
             } else {
                 console.error("Erro no cadastro:", content.message);
                 alert("Não foi possível completar o cadastro. Por favor, tente novamente.");
+                // Acrecentar sweetAlert
+
                 // Se o cadastro falhar, exibe uma mensagem de erro no console e um alerta ao usuário.
             }
         } else {
             alert("Por favor, preencha todos os campos.");
+            // Acrecentar sweetAlert
+
             // Se algum campo estiver vazio, exibe um alerta solicitando o preenchimento de todos os campos.
         }
     } catch (error) {

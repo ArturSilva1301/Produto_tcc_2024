@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 // Importa o módulo 'express' e cria um roteador para definir rotas.
 
-const { storeResponsaveis, authenticateResponsaveis } = require('../controller/responsaveisController');
+const { storeResponsaveis, authenticateResponsaveis, buscarDadosResp } = require('../controller/responsaveisController');
 // Importa funções do controlador para manipular o cadastro e autenticação dos responsáveis.
 
 /**
@@ -43,7 +43,7 @@ router.post('/cadastro', storeResponsaveis);
 router.post('/responsaveis/login', authenticateResponsaveis);
 // Define uma rota POST '/login' que usa 'authenticateResponsaveis' para autenticar responsáveis.
 
-router.get('/responsaveis/login/:IdUser', buscarDadosEscola);
+router.get('/responsaveis/dados/:id', buscarDadosResp);
 
 module.exports = router;
 // Exporta o roteador para ser utilizado em outras partes da aplicação.

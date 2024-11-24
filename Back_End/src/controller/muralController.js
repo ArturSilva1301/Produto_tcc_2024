@@ -23,7 +23,7 @@ if (!fs.existsSync(caminhoimg)) {
 
 async function postImagem(request, response) {
 
-  if(!request.files) {
+  if (!request.files) {
     return response.status(400).json({
       success: false,
       message: "Você não enviou o arquivo de imagem"
@@ -46,7 +46,7 @@ async function postImagem(request, response) {
 
     const params = Array(
       imgnome,
-      request.body.cod_escola 
+      request.body.cod_escola
     );
     // Cria um array 'params' contendo o nome da imagem, que será usado na query do banco de dados.
 
@@ -55,7 +55,7 @@ async function postImagem(request, response) {
 
     connection.query(query, params, (err, results) => {
       if (results) {
-        response.status(200).json({
+        response.status(201).json({
           success: true,
           message: "Sucesso no update!",
           params: params,
@@ -74,76 +74,138 @@ async function postImagem(request, response) {
     });
 
   });
-
 }
 
 async function getImagem(request, response) {
   const codEscola = request.params.cod_escola;
-  
+
   // Verifica se o código da escola foi fornecido
   if (!codEscola) {
     return response.status(400).json({
       success: false,
-      message: "Código da escola não fornecido."
+      message: "Código da escola não fornecido.",
     });
   }
 
-  const query = "SELECT imagem FROM imagem WHERE codigo_escola = ?";
-  
+  const query = "SELECT id, imagem FROM imagem WHERE codigo_escola = ?";
+
   connection.query(query, [codEscola], (err, results) => {
     if (err) {
-      return response.status(500).json({
+      response.status(400).json({
         success: false,
-        message: "Erro ao acessar o banco de dados.",
-        data: err
+        message: "Erro ao buscar as imagens!",
       });
-    }
 
-    if (results.length > 0) {
+    } else {
       response.status(200).json({
         success: true,
-        message: "Imagem encontrada.",
-        data: results
-      });
-    } else {
-      response.status(404).json({
-        success: false,
-        message: "Imagem não encontrada."
+        message: "Imagens buscadas!",
+        data: results,
       });
     }
   });
 }
 
-async function salvarImgMural(request, response) {
-  // Obtém os IDs da atividade e do usuário do corpo da requisição
-  const imagemId = request.body.atividade_id;
-  const usuarioId = request.body.usuario_id;
+// Favorita a imagem do usuário
+function favImagem(request, response) {
+  const { img_mural, idUser, cod_escola } = request.body;
 
-  // Define os parâmetros a serem inseridos na tabela 'salvos'
-  const params = [
-      atividadeId,
-      usuarioId
-  ];
+  // Selecionando o id da imagem
+  const querySelect = "SELECT id FROM imagem WHERE codigo_escola = ? AND imagem = ?";
 
-  // Define a query SQL para salvar a atividade para o usuário
-  const query = 'INSERT INTO salvos(atividade_id, id_usuario) VALUES(?,?)';
+  // Executa a primeira query
+  connection.query(querySelect, [cod_escola, img_mural], (err, results) => {
+    if (err) {
+      return response.status(400).json({
+        success: false,
+        message: "Erro ao buscar o id da imagem!",
+      });
+    }
 
-  // Executa a query no banco de dados
-  connection.query(query, params, (err, results) => {
+    if (results.length === 0) {
+      return response.status(404).json({
+        success: false,
+        message: "Nenhum resultado encontrado!",
+      });
+    }
+
+    // Armazenando imagem favoritada
+    const queryInsert = "INSERT INTO imagem_fav(id_img, imagem, id_responsavel, id_escola) VALUES(?,?,?,?)";
+
+    const params = [
+      results[0].id,
+      img_mural,
+      idUser,
+      cod_escola
+    ];
+
+    // Executa a segunda query
+    connection.query(queryInsert, params, (err, results) => {
       if (err) {
-          response.status(400).json({ 
-              success: false, 
-              message: "Erro ao salvar atividade!"
-          });
-      } else {
-          response.status(201).json({ 
-              success: true, 
-              message: "Atividade salva com sucesso!" 
-          });
+        return response.status(400).json({
+          success: false,
+          message: "Erro ao salvar imagem!",
+        });
       }
+
+      // Responde com sucesso
+      return response.status(201).json({
+        success: true,
+        message: "Imagem favoritada com sucesso!",
+      });
+    });
   });
 }
 
+// Deleta a imagem favoritada pelo usuário
+function DelfavImagem(request, response) {
+  const { id_img_mural } = request.body;
 
-module.exports = { postImagem, getImagem };
-// Exporta a função 'postImagem' para ser utilizada em outras partes da aplicação.
+  // Selecionando o id da imagem
+  const querySelect = "DELETE FROM imagem_fav WHERE id_img = ?;";
+
+  // Executa a primeira query
+  connection.query(querySelect, [id_img_mural], (err, results) => {
+    if (err) {
+      return response.status(400).json({
+        success: false,
+        message: "Erro ao desfavoritar imagem!",
+        data: results
+      });
+    }
+    else {
+      return response.status(201).json({
+        success: true,
+        message: "Imagem desfavoritada com sucesso!",
+        data: results
+      });
+    }
+  });
+}
+
+// Realiza a busca do id das imagens favoritadas pelo usuário, para assim, o frontend realizar a diferenciação das imagens que foram e que não foram favoritadas pelo usuário
+async function getImgFav(request, response) {
+  const idUser = request.params.idUser;
+
+  const query = "SELECT id_img FROM imagem_fav WHERE id_responsavel = ?";
+
+  connection.query(query, [idUser], (err, results) => {
+    if (err) {
+      response.status(400).json({
+        success: false,
+        message: "Erro ao buscar imgs favoritadas pelo usuário!",
+        data: results
+      });
+
+    } else {
+      response.status(201).json({
+        success: true,
+        message: "Sucesso ao buscar imgs favoritadas pelo usuário!",
+        data: results,
+      });
+    }
+  });
+}
+
+// Exporta as funções
+module.exports = { postImagem, getImagem, favImagem, DelfavImagem, getImgFav };

@@ -3,8 +3,8 @@ const connection = require('../config/db');
 
 async function storeResponsaveis(request, response) {
   const { nome, email, senha, codigo_escola } = request.body;
-  // Extrai os dados enviados na requisição.
 
+  // Extrai os dados enviados na requisição.
   const query = "INSERT INTO responsavel(nome, email, senha, codigo_escola) VALUES (?, ?, ?,?);";
   // Define a consulta SQL para inserir um novo registro na tabela 'responsavel'.
 
@@ -62,8 +62,33 @@ async function authenticateResponsaveis(request, response) {
   // Executa a consulta SQL para autenticação e responde com sucesso ou erro.
 }
 
+async function buscarDadosResp(request, response) {
+  const { id } = request.params;
+
+  const params = [id];
+
+  const query = "SELECT * FROM responsavel WHERE id = ?;";
+
+  connection.query(query, params, (err, results) => {
+    if (err) {
+      response.status(400).json({
+        success: false,
+        message: "Credenciais inválidas",
+      });
+
+    } else {
+      response.status(200).json({
+        success: true,
+        message: "Usuário autenticado com sucesso",
+        data: results,
+      });
+    }
+  });
+}
+
 module.exports = {
   storeResponsaveis,
-  authenticateResponsaveis
+  authenticateResponsaveis,
+  buscarDadosResp
 };
 // Exporta as funções para serem utilizadas em outras partes da aplicação.

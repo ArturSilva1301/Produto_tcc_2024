@@ -12,13 +12,12 @@ async function buscar_perfil_escola(cod_escola) {
         });
 
         const content = await response.json();
-        console.log(content);
 
         if (content.success) {
-            input_nome.value=content.data[0].nome;
-            input_email.value=content.data[0].email;
-            input_senha.value=content.data[0].senha;
-            input_idescola.value=content.data[0].codigo_escola;
+            input_nome.value = content.data[0].nome;
+            input_email.value = content.data[0].email;
+            input_senha.value = content.data[0].senha;
+            input_idescola.value = content.data[0].codigo_escola;
         } else {
             console.error("Erro na resposta:", content);
             alert("Não deu o GET para a escola!!");
@@ -32,15 +31,18 @@ async function buscar_perfil_escola(cod_escola) {
 // Função para buscar dados do perfil do responsável
 async function buscar_perfil_responsavel(idUser) {
     try {
-        const response = await fetch(`http://localhost:3008/api/User/BuscandoDadosUser/${idUser}`, {
+        const response = await fetch(`http://localhost:3008/api/responsaveis/dados/${idUser}`, {
             method: "GET",
             headers: { "Content-type": "application/json;charset=UTF-8" }
         });
 
         const content = await response.json();
-        console.log(content);
 
         if (content.success) {
+            input_nome.value = content.data[0].nome;
+            input_email.value = content.data[0].email;
+            input_senha.value = content.data[0].senha;
+            input_idescola.value = content.data[0].codigo_escola;
         } else {
             console.error("Erro na resposta:", content);
             alert("Não deu o GET para o responsável!!");
@@ -62,7 +64,9 @@ if (tipo_usuario === 'escola') {
     const idUser = Number(localStorage.getItem('idUser'));
     buscar_perfil_responsavel(idUser);
 } else {
+    // Acrecentar sweetAlert
     alert("Tipo de usuário desconhecido ou não definido!");
+    window.location.href = '../home/home.html';
 }
 
 

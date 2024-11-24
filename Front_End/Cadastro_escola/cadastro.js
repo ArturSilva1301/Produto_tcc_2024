@@ -26,6 +26,8 @@ async function handleSubmit(e) {
 
             if (content.success) {
                 alert("Escola criada com sucesso!");
+                // Acrecentar sweetAlert
+
                 setTimeout(() => {
                     window.location.href = "../Login_escola/login.html";
                 }, 2000);
@@ -33,6 +35,8 @@ async function handleSubmit(e) {
             } else {
                 console.error("Erro no cadastro:", content.message);
                 alert("Não foi possível completar o cadastro. Por favor, tente novamente.");
+                // Acrecentar sweetAlert
+
                 // Se o cadastro falhar, exibe uma mensagem de erro no console e um alerta ao usuário.
             }
         } else {
