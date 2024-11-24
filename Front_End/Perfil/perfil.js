@@ -1,3 +1,13 @@
+let aba_img_fav = document.getElementById("imagemfavIcon");
+
+let idUser = localStorage.getItem("idUser");
+let tipo_usuario = localStorage.getItem("tipo_usuario");
+let cod_escola = localStorage.getItem("cod_escola");
+
+if (tipo_usuario === 'escola') {
+    aba_img_fav.style.display = 'none';
+  } 
+
 const input_nome = document.getElementById("nome")
 const input_email = document.getElementById("email")
 const input_senha = document.getElementById("password")
@@ -62,9 +72,6 @@ async function buscar_perfil_responsavel(idUser) {
     }
 }
 
-// Determinar o tipo de usuário salvo no localStorage
-const tipo_usuario = localStorage.getItem('tipo_usuario');
-
 // Verificar o tipo de usuário e chamar a função correspondente
 if (tipo_usuario === 'escola') {
     const cod_escola = Number(localStorage.getItem('cod_escola'));
@@ -113,3 +120,7 @@ settingsIcon.addEventListener("click", function () {
 imagesIcon.addEventListener("click", function () {
     window.location.href = "../Mural_de_atividades/mural.html"; // Altere o caminho para a página desejada
 });
+
+imagemfavIcon.addEventListener("click", function () {
+    window.location.href = "../Favoritos/favoritos.html"; // Altere o caminho para a página desejada
+  });

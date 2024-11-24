@@ -1,5 +1,6 @@
 // Seleciona o elemento 'button' na página e o armazena na variável 'button'.
 let button = document.querySelector(".img_mural");
+let aba_img_fav = document.getElementById("imagemfavIcon");
 
 let idUser = localStorage.getItem("idUser");
 let tipo_usuario = localStorage.getItem("tipo_usuario");
@@ -7,7 +8,8 @@ let cod_escola = localStorage.getItem("cod_escola");
 
 if (tipo_usuario === 'responsavel') {
   button.style.display = 'none';
-  // Acrescentar lógica para visualização do botão da tela de favoritos
+} else {
+  aba_img_fav.style.display = 'none';
 }
 
 // Carregando as imagens 
@@ -217,4 +219,8 @@ settingsIcon.addEventListener("click", function () {
 
 imagesIcon.addEventListener("click", function () {
   window.location.href = "../Mural_de_atividades/mural.html"; // Altere o caminho para a página desejada
+});
+
+imagemfavIcon.addEventListener("click", function () {
+  window.location.href = "../Favoritos/favoritos.html"; // Altere o caminho para a página desejada
 });
