@@ -69,7 +69,18 @@ button.onclick = async function (e) {
         }
     } else {
         console.error("Erro ao realizar login:", content.message);
-        alert("Conta não encontrada!!");
+        Swal.fire({
+            title: "Conta não encontrada!!",
+            icon: "warning",
+            showConfirmButton: false,
+            timer: 2000
+        });
         // Se o login não foi bem-sucedido, exibe uma mensagem de erro no console e um alerta de conta não encontrada.
     }
 };
+
+document.getElementById("botaoCadastro").addEventListener("click", () => {
+    setTimeout(() => {
+        window.location.href = "../Cadastro_responsavel/cadastro_inicio.html";
+    }, 2000);
+});

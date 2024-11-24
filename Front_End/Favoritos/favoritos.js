@@ -73,8 +73,12 @@ async function buscandoImgFav() {
                     if (content.success) {
                         // Ao armazenar com sucesso a imagem favoritada dentro do banco de dados, a estrela é preechida no frontend
                         icon.className = 'bi bi-star-fill';
-
-                        // Acrecentar sweetAlert
+                        Swal.fire({
+                            title: "Imagem adicionada a aba de favoritos!",
+                            icon: "warning",
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                     }
                 } else {
                     // Remove a imagem dos favoritos
@@ -90,7 +94,12 @@ async function buscandoImgFav() {
                         // Ao remover com sucesso a imagem favoritada dentro do banco de dados, a estrela fica vazia no frontend
                         icon.className = 'bi bi-star';
 
-                        // Acrecentar sweetAlert
+                        Swal.fire({
+                            title: "Imagem removida da aba de favoritos!",
+                            icon: "warning",
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                     }
                 }
             });

@@ -63,7 +63,12 @@ async function buscandoImagens() {
         }
       } else {
         // Se não encontrar a variável do localStorage 'tipo_usuário'
-        alert('Realize o login!!');
+        Swal.fire({
+          title: "Realize o login!",
+          icon: "warning",
+          showConfirmButton: false,
+          timer: 2000
+      });
         window.location.hreg = '../home/home.html';
       }
     }
@@ -104,7 +109,13 @@ async function buscandoImagens() {
             // Ao armazenar com sucesso a imagem favoritada dentro do banco de dados, a estrela é preechida no frontend
             icon.className = 'bi bi-star-fill';
 
-            // Acrecentar sweetAlert
+            Swal.fire({
+              title: "Imagem adicionada a aba de favoritos!",
+              icon: "warning",
+              showConfirmButton: false,
+              timer: 2000
+          });
+
           }
         } else {
           // Remove a imagem dos favoritos
@@ -120,13 +131,23 @@ async function buscandoImagens() {
             // Ao remover com sucesso a imagem favoritada dentro do banco de dados, a estrela fica vazia no frontend
             icon.className = 'bi bi-star';
 
-            // Acrecentar sweetAlert
+            Swal.fire({
+              title: "Imagem removida da aba de favoritos!",
+              icon: "warning",
+              showConfirmButton: false,
+              timer: 2000
+          });
           }
         }
       });
     });
   } else {
-    alert('Erro ao carregar as imagens!');
+    Swal.fire({
+      title: "Erro ao carregar as imagens!",
+      icon: "warning",
+      showConfirmButton: false,
+      timer: 2000
+  });
     console.error();
   }
 }
@@ -160,15 +181,25 @@ button.onclick = async function () {
     // Converte a resposta da requisição em JSON e a armazena em 'content'. Exibe o conteúdo da resposta no console.
 
     if (content.success) {
-      alert("IMAGEM FOI!");
-      // Acrecentar sweetAlert
+
+      Swal.fire({
+        title: "Imagem adicionada ao mural!",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 2000
+    });
 
       // Se o upload da imagem foi bem-sucedido, exibe um alerta informando que a imagem foi enviada com sucesso.
       window.location.reload();
     } else {
       console.error("ERRO ao mandar a imagem:", content);
-      alert("Selecione a imagem novamente");
-      // Acrecentar sweetAlert
+
+      Swal.fire({
+        title: "Selecione a imagem novamente!",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 2000
+    });
 
       // Se houve um erro ao enviar a imagem, exibe um erro no console com os detalhes e um alerta pedindo para tentar novamente.
     }

@@ -13,7 +13,12 @@ button.onclick = async function(e) {
     // Captura e remove espaços em branco dos valores dos campos de entrada.
 
     if (!nome || !email || !senha || !codigo_escola) {
-        alert("Por favor, preencha todos os campos.");
+        Swal.fire({
+            title: "Por favor, preencha todos os campos.",
+            icon: "warning",
+            showConfirmButton: false,
+            timer: 2000
+        });
         // Exibe um alerta se algum campo obrigatório estiver vazio.
         return;
     }
@@ -41,22 +46,35 @@ button.onclick = async function(e) {
         // Converte a resposta em JSON e a exibe no console.
 
         if (content.success) {
-            alert("Cadastro realizado com sucesso!");
-            // Acrecentar sweetAlert
+            Swal.fire({
+                title: "Cadastro realizado com sucesso!",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 2000
+            });
 
             window.location.replace("../Login_responsavel/login.html");
             // Exibe um alerta de sucesso e redireciona para a página de login se o cadastro for bem-sucedido.
         } else {
             console.log(content)
             console.error("Erro no cadastro:", content.message);
-            alert("Não foi possível completar o cadastro. Por favor, tente novamente.");
-            // Acrecentar sweetAlert
+            Swal.fire({
+                title: "Não foi possível completar o cadastro. Por favor, tente novamente.",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 2000
+            });
             
             // Exibe uma mensagem de erro se o cadastro falhar.
         }
     } catch (error) {
         console.error("Erro ao tentar cadastrar:", error.message);
-        alert("Erro ao tentar cadastrar. Por favor, tente novamente mais tarde.");
+        Swal.fire({
+            title: "Erro ao tentar cadastrar. Por favor, tente novamente mais tarde.",
+            icon: "warning",
+            showConfirmButton: false,
+            timer: 2000
+        });
         // Captura e exibe erros que ocorram durante o processo de cadastro.
     }
 };

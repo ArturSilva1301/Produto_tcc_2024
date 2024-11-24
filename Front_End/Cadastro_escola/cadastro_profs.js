@@ -25,8 +25,12 @@ async function handleSubmitProfessor(e) {
             // Converte a resposta em JSON e exibe no console.
 
             if (content.success) {
-                alert("Professor cadastrado com sucesso!");
-                // Acrecentar sweetAlert
+                Swal.fire({
+                    title: "Professor cadastrado com sucesso!",
+                    icon: "warning",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
 
                 setTimeout(() => {
                     window.location.href = "../Login_professor/login.html";
@@ -34,20 +38,33 @@ async function handleSubmitProfessor(e) {
                 // Se o cadastro for bem-sucedido, exibe um alerta e redireciona para a página de login após 2 segundos.
             } else {
                 console.error("Erro no cadastro:", content.message);
-                alert("Não foi possível completar o cadastro. Por favor, tente novamente.");
-                // Acrecentar sweetAlert
+                Swal.fire({
+                    title: "Não foi possível completar o cadastro. Por favor, tente novamente.",
+                    icon: "warning",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
 
                 // Se o cadastro falhar, exibe uma mensagem de erro no console e um alerta ao usuário.
             }
         } else {
-            alert("Por favor, preencha todos os campos.");
-            // Acrecentar sweetAlert
+            Swal.fire({
+                title: "Por favor, preencha todos os campos.",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 2000
+            });
 
             // Se algum campo estiver vazio, exibe um alerta solicitando o preenchimento de todos os campos.
         }
     } catch (error) {
         console.error("Erro ao tentar cadastrar:", error.message);
-        alert("Erro ao tentar cadastrar. Por favor, tente novamente mais tarde.");
+        Swal.fire({
+            title: "Erro ao tentar cadastrar. Por favor, tente novamente mais tarde.",
+            icon: "warning",
+            showConfirmButton: false,
+            timer: 2000
+        });
         // Captura e trata erros durante o processo de cadastro, exibindo uma mensagem de erro ao usuário.
     }
 }

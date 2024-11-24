@@ -93,3 +93,9 @@ button.onclick = async function(e) {
         // exibindo uma mensagem de erro apropriada com SweetAlert2.
     }
 };
+
+document.getElementById("botaoCadastro").addEventListener("click", () => {
+    setTimeout(() => {
+        window.location.href = "../Cadastro_responsavel/cadastro_inicio.html";
+    }, 2000);
+});

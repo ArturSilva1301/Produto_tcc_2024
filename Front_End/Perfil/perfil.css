@@ -89,10 +89,10 @@ footer {
 
 footer i {
     position: relative;
-    /* top: 27%; */
+    top: 27%;
     z-index: 20;
     font-size: 2rem;
-    margin-left: 27%;
+    margin-left: 18%;
     color: white;
 }
 

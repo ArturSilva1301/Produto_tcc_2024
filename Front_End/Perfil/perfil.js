@@ -20,11 +20,16 @@ async function buscar_perfil_escola(cod_escola) {
             input_idescola.value = content.data[0].codigo_escola;
         } else {
             console.error("Erro na resposta:", content);
-            alert("Não deu o GET para a escola!!");
+            Swal.fire({
+                title: "Erro ao buscar dados!",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 2000
+            });
         }
     } catch (error) {
         console.error("Erro no fetch:", error);
-        alert("Erro ao buscar os dados da escola!");
+
     }
 }
 
@@ -45,11 +50,15 @@ async function buscar_perfil_responsavel(idUser) {
             input_idescola.value = content.data[0].codigo_escola;
         } else {
             console.error("Erro na resposta:", content);
-            alert("Não deu o GET para o responsável!!");
+            Swal.fire({
+                title: "Erro ao buscar dados!",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 2000
+            });
         }
     } catch (error) {
         console.error("Erro no fetch:", error);
-        alert("Erro ao buscar os dados do responsável!");
     }
 }
 
@@ -64,8 +73,12 @@ if (tipo_usuario === 'escola') {
     const idUser = Number(localStorage.getItem('idUser'));
     buscar_perfil_responsavel(idUser);
 } else {
-    // Acrecentar sweetAlert
-    alert("Tipo de usuário desconhecido ou não definido!");
+    Swal.fire({
+        title: "Tipo de usuário desconhecido! Faça o login novamente!",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 2000
+    });
     window.location.href = '../home/home.html';
 }
 

@@ -71,3 +71,17 @@ form div button {
     font-size: 2rem;
     border-radius: 8vw;
 }
+
+.botao_cadastro {
+    all: unset; /* Remove todos os estilos padrão do botão */
+    display: block; /* Garante que ele ocupe uma linha inteira */
+    text-align: center; /* Centraliza o texto */
+    color: cor var(--cor-fundo2); /* Define a cor como azul, similar a links */
+    font-size: 14px; /* Define um tamanho apropriado para o texto */
+    text-decoration: underline; /* Adiciona sublinhado */
+    cursor: pointer; /* Troca o cursor para o formato de mão ao passar por cima */
+    margin-top: 10px; /* Adiciona espaço acima do texto */
+}
+.botao_cadastro:hover {
+    color: var(--cor-fundo); /* Torna o texto mais escuro ao passar o mouse */
+}
