@@ -27,7 +27,7 @@ async function handleSubmit(e) {
             if (content.success) {
                 Swal.fire({
                     title: "Escola criada com sucesso!",
-                    icon: "warning",
+                    icon: "success",
                     showConfirmButton: false,
                     timer: 2000
                 });

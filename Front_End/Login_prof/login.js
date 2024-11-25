@@ -13,7 +13,12 @@ button.onclick = async function (e) {
     // Captura os valores dos campos de entrada (email, senha, e código da escola) e remove os espaços em branco extras.
 
     if (!nome || !email || !senha || !cod_escola) {
-        alert("Por favor, preencha todos os campos.");
+        Swal.fire({
+            title: "Por favor, preencha todos os campos.",
+            icon: "warning",
+            showConfirmButton: false,
+            timer: 2000
+        });
         return;
     }
     // Verifica se todos os campos foram preenchidos. Se algum campo estiver vazio, exibe um alerta e interrompe a execução.
@@ -59,7 +64,7 @@ button.onclick = async function (e) {
             Swal.fire({
                 title: "Conta não encontrada!!",
                 text: "Tente novamente ou crie uma conta!!",
-                icon: "error",
+                icon: "warning",
                 showConfirmButton: false,
                 timer: 2300
             });

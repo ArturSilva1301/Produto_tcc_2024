@@ -113,7 +113,7 @@ async function buscandoImagens() {
 
             Swal.fire({
               title: "Imagem adicionada a aba de favoritos!",
-              icon: "warning",
+              icon: "success",
               showConfirmButton: false,
               timer: 2000
           });
@@ -135,7 +135,7 @@ async function buscandoImagens() {
 
             Swal.fire({
               title: "Imagem removida da aba de favoritos!",
-              icon: "warning",
+              icon: "success",
               showConfirmButton: false,
               timer: 2000
           });
@@ -186,7 +186,7 @@ button.onclick = async function () {
 
       Swal.fire({
         title: "Imagem adicionada ao mural!",
-        icon: "warning",
+        icon: "success",
         showConfirmButton: false,
         timer: 2000
     });

@@ -66,7 +66,7 @@ button.onclick = async function(e) {
                 Swal.fire({
                     title: "Credenciais inválidas!",
                     text: "Verifique suas credenciais e tente novamente.",
-                    icon: "error",
+                    icon: "warning",
                     showConfirmButton: false,
                     timer: 2300
                 });
@@ -76,7 +76,7 @@ button.onclick = async function(e) {
             Swal.fire({
                 title: "Conta não encontrada!",
                 text: "Verifique seus dados e tente novamente.",
-                icon: "error",
+                icon: "warning",
                 showConfirmButton: false,
                 timer: 2300
             });
@@ -87,7 +87,7 @@ button.onclick = async function(e) {
         Swal.fire({
             title: "Erro",
             text: "Erro ao realizar a requisição.",
-            icon: "error"
+            icon: "warning"
         });
         // Captura e trata qualquer erro que ocorra durante o processo de login,
         // exibindo uma mensagem de erro apropriada com SweetAlert2.
@@ -96,6 +96,6 @@ button.onclick = async function(e) {
 
 document.getElementById("botaoCadastro").addEventListener("click", () => {
     setTimeout(() => {
-        window.location.href = "../Cadastro_responsavel/cadastro_inicio.html";
+        window.location.href = "../Cadastro_escola/cadastro.html";
     }, 2000);
 });

@@ -48,7 +48,7 @@ button.onclick = async function(e) {
         if (content.success) {
             Swal.fire({
                 title: "Cadastro realizado com sucesso!",
-                icon: "warning",
+                icon: "success",
                 showConfirmButton: false,
                 timer: 2000
             });

@@ -75,7 +75,7 @@ async function buscandoImgFav() {
                         icon.className = 'bi bi-star-fill';
                         Swal.fire({
                             title: "Imagem adicionada a aba de favoritos!",
-                            icon: "warning",
+                            icon: "success",
                             showConfirmButton: false,
                             timer: 2000
                         });
@@ -96,7 +96,7 @@ async function buscandoImgFav() {
 
                         Swal.fire({
                             title: "Imagem removida da aba de favoritos!",
-                            icon: "warning",
+                            icon: "success",
                             showConfirmButton: false,
                             timer: 2000
                         });
